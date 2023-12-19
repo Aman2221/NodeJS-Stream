@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 const fs = require("fs");
-const PORT = 8000;
+const PORT = process.env.PORT | 8000;
 
 // Node js streams solver the problem of loading large set of data and sending it to the server without server
 // crash because it loads and sends data chunk by chunk which results into good performance and memory usage
@@ -18,6 +18,7 @@ app.get("/stream", (req, res) => {
 // Imaging you have a 100MB file and 100 users are accessing it then the server will get crashed
 app.get("/", (req, res) => {
   fs.readFile("./sample.txt", (err, data) => {
+    console.log(data);
     res.end(data);
   });
 });
